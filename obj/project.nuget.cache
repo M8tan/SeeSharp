@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "LLEeDugR1Ss=",
+  "dgSpecHash": "ROM7ltdgxiI=",
   "success": true,
-  "projectFilePath": "c:\\Projects\\SeeSharp\\SeeSharp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Projects\\Private\\SeeSharp\\SeeSharp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MatanJ\\.nuget\\packages\\system.diagnostics.eventlog\\10.0.9\\system.diagnostics.eventlog.10.0.9.nupkg.sha512",
+    "C:\\Users\\MatanJ\\.nuget\\packages\\system.serviceprocess.servicecontroller\\10.0.9\\system.serviceprocess.servicecontroller.10.0.9.nupkg.sha512"
+  ],
   "logs": []
 }
