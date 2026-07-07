@@ -1,0 +1,15 @@
+c:\Projects\SeeSharp\bin\Debug\net10.0\SeeSharp.exe
+c:\Projects\SeeSharp\bin\Debug\net10.0\SeeSharp.deps.json
+c:\Projects\SeeSharp\bin\Debug\net10.0\SeeSharp.runtimeconfig.json
+c:\Projects\SeeSharp\bin\Debug\net10.0\SeeSharp.dll
+c:\Projects\SeeSharp\bin\Debug\net10.0\SeeSharp.pdb
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.GeneratedMSBuildEditorConfig.editorconfig
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.AssemblyInfoInputs.cache
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.AssemblyInfo.cs
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.csproj.CoreCompileInputs.cache
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.sourcelink.json
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.dll
+c:\Projects\SeeSharp\obj\Debug\net10.0\refint\SeeSharp.dll
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.pdb
+c:\Projects\SeeSharp\obj\Debug\net10.0\SeeSharp.genruntimeconfig.cache
+c:\Projects\SeeSharp\obj\Debug\net10.0\ref\SeeSharp.dll
