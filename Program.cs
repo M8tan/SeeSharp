@@ -40,21 +40,19 @@ Display_Menu();
 bool AppRunning = true;
 while (AppRunning)
 {
+    services = reader.GetServices();
     Console.WriteLine("Your choice: ");
     string? input = Console.ReadLine();
     switch (input)
     {
         case "1":
-            services = reader.GetServices();
             PrintServices(services);
             break;
         case "2":
-            services = reader.GetServices();
             stopped = GetServicesBasedOnStatus(services, false);
             PrintServices(stopped);
             break;
         case "3":
-            services = reader.GetServices();
             running = GetServicesBasedOnStatus(services, true);
             PrintServices(running);
             break;
