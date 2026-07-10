@@ -136,19 +136,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MatanJ\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\Private\\SeeSharp\\SeeSharp.csproj",
+      "projectUniqueName": "c:\\Projects\\SeeSharp\\SeeSharp.csproj",
       "projectName": "SeeSharp",
-      "projectPath": "C:\\Projects\\Private\\SeeSharp\\SeeSharp.csproj",
-      "packagesPath": "C:\\Users\\MatanJ\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\Private\\SeeSharp\\obj\\",
+      "projectPath": "c:\\Projects\\SeeSharp\\SeeSharp.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "c:\\Projects\\SeeSharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\MatanJ\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0-windows"
