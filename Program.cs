@@ -1,11 +1,14 @@
 ﻿void Display_Menu()
 {
+    Console.WriteLine();
+    Console.WriteLine("====================================");
     Console.WriteLine("1. List all services");
     Console.WriteLine("2. List stopped services");
     Console.WriteLine("3. List running services");
     Console.WriteLine("4. Start stopped services");
     Console.WriteLine("10. Exit");
-
+    Console.WriteLine("====================================");
+    Console.WriteLine();
 }
 
 List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
@@ -23,16 +26,31 @@ List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool 
 
 void PrintServices(List<ServiceRecord> services)
 {
+    Console.WriteLine();
+    Console.WriteLine("Id   Status     Display Name");
+    Console.WriteLine("-------------------------------------------");
     for(int i = 0; i < services.Count(); i++)
     {
-        Console.WriteLine($"{i}. {services[i].Name}");
+        Console.WriteLine($"{i,-4} {services[i].Status,-10} {services[i].DisplayName}");
     }
+    Console.WriteLine();
 }
+
+void PrintServiceDetails(ServiceRecord service)
+{
+    Console.WriteLine();
+    Console.WriteLine($"Display Name : {service.DisplayName}");
+    Console.WriteLine($"Service Name : {service.Name}");
+    Console.WriteLine($"Status       : {service.Status}");
+    Console.WriteLine($"Can Stop     : {service.CanStop}");
+    Console.WriteLine($"Can Pause    : {service.CanPause}");
+    Console.WriteLine();
+}
+
+
 
 ServiceReader reader = new();
 List<ServiceRecord> services;
-List<ServiceRecord> stopped;
-List<ServiceRecord> running;
 
 Console.WriteLine("=== Welcome to the service watcher! ===");
 Display_Menu();
@@ -49,12 +67,13 @@ while (AppRunning)
             PrintServices(services);
             break;
         case "2":
-            stopped = GetServicesBasedOnStatus(services, false);
-            PrintServices(stopped);
+            PrintServices(GetServicesBasedOnStatus(services, false));
             break;
         case "3":
-            running = GetServicesBasedOnStatus(services, true);
-            PrintServices(running);
+            PrintServices(GetServicesBasedOnStatus(services, true));
+            break;
+        case "4":
+            PrintServiceDetails(services[100]);
             break;
         case "10":
             Console.WriteLine("OK!");
@@ -63,7 +82,6 @@ while (AppRunning)
         default:
             Console.WriteLine($"Unknown option - {input}");
             break;
-
     }
 }
 

@@ -9,8 +9,15 @@ class ServiceReader
         {
             services.Add(new ServiceRecord
             {
-                Name = service.DisplayName,
+                Name = service.ServiceName,
+                DisplayName = service.DisplayName,
+
                 IsRunning = service.Status == ServiceControllerStatus.Running,
+                Status = service.Status.ToString(),
+
+                CanStop = service.CanStop,
+                CanPause = service.CanPauseAndContinue,
+
                 RestartCount = 0
             });
         }

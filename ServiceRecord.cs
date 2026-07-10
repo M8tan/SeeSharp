@@ -1,25 +1,31 @@
 class ServiceRecord
 {
     public string Name { get; set; } = "";
+    public string DisplayName { get; set; } = "";
+
     public bool IsRunning { get; set; }
+
+    public string Status { get; set; } = "";
+
+    public bool CanStop { get; set; }
+
+    public bool CanPause { get; set; }
+
     public int RestartCount { get; set; }
+
     public void Start()
     {
         IsRunning = true;
     }
+
     public void Stop()
     {
         IsRunning = false;
     }
+
     public void Restart()
     {
-        if (IsRunning)
-        {
-            IsRunning = true;
-            RestartCount++; 
-        } else
-        {
-            Start();
-        }
+        RestartCount++;
+        IsRunning = true;
     }
 }
