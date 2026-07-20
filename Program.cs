@@ -1,4 +1,6 @@
-﻿void Display_Menu()
+﻿using System.Security.Cryptography.X509Certificates;
+
+void Display_Menu()
 {
     Console.WriteLine();
     Console.WriteLine("====================================");
@@ -6,11 +8,12 @@
     Console.WriteLine("2. List stopped services");
     Console.WriteLine("3. List running services");
     Console.WriteLine("4. Start stopped services");
+    Console.WriteLine("5. Search service by name");
     Console.WriteLine("10. Exit");
     Console.WriteLine("====================================");
     Console.WriteLine();
 }
-
+/*
 List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
 {   
     List<ServiceRecord> result = new();
@@ -22,6 +25,17 @@ List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool 
         }
     }
     return result;
+}
+*/
+
+List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
+{   
+    return services.Where(s => s.IsRunning == running).ToList();
+}
+
+List<ServiceRecord> SearchServiceKeyword(List<ServiceRecord> services, string query)
+{   
+    return services.Where(s => s.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || s.DisplayName.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
 }
 
 void PrintServices(List<ServiceRecord> services)
@@ -75,6 +89,14 @@ while (AppRunning)
         case "4":
             PrintServiceDetails(services[100]);
             break;
+            case "5":
+                Console.WriteLine("Search keyword:");
+                string? query = Console.ReadLine();
+                if(query == "" || query == null){Console.WriteLine("No keyword provided"); break;;}
+                var results = SearchServiceKeyword(services, query);
+                PrintServices(results);
+                Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
+                break;;
         case "10":
             Console.WriteLine("OK!");
             AppRunning = false;

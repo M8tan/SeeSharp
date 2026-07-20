@@ -13,19 +13,4 @@ class ServiceRecord
 
     public int RestartCount { get; set; }
 
-    public void Start()
-    {
-        IsRunning = true;
-    }
-
-    public void Stop()
-    {
-        IsRunning = false;
-    }
-
-    public void Restart()
-    {
-        RestartCount++;
-        IsRunning = true;
-    }
 }
