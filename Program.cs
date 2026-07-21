@@ -45,7 +45,7 @@ void PrintServices(List<ServiceRecord> services)
     Console.WriteLine("-------------------------------------------");
     for(int i = 0; i < services.Count(); i++)
     {
-        Console.WriteLine($"{i,-4} {services[i].Status,-10} {services[i].DisplayName}");
+        Console.WriteLine($"{i+1,-4} {services[i].Status,-10} {services[i].DisplayName}");
     }
     Console.WriteLine();
 }
