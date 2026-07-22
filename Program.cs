@@ -13,6 +13,7 @@ void Display_Menu()
     Console.WriteLine("4. Search services by name");
     Console.WriteLine("5. Start service");
     Console.WriteLine("6. Stop service {requires admin priviliges}");
+    Console.WriteLine("7. Watch service");
     Console.WriteLine("10. Exit");
     Console.WriteLine("====================================");
     Console.WriteLine();
@@ -23,9 +24,40 @@ List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool 
     return services.Where(s => s.IsRunning == running).ToList();
 }
 
+/*
+List<ServiceRecord> GetServicesBasedOnStopability(List<ServiceRecord> services, bool canstop)
+{   
+    return services.Where(s => s.CanStop == canstop).ToList();
+}
+*/
+
 List<ServiceRecord> SearchServiceKeyword(List<ServiceRecord> services, string query)
 {   
     return services.Where(s => s.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || s.DisplayName.Contains(query, StringComparison.OrdinalIgnoreCase)).OrderBy(s => s.DisplayName).ToList();
+}
+
+ServiceRecord? SelectService(List<ServiceRecord> services)
+{
+    Console.Write("Search service: ");
+    string? query = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(query)){return null;}
+    var results = SearchServiceKeyword(services, query);
+
+    if (results.Count == 0)
+    {
+        Console.WriteLine($"No matches for '{query}'");
+        return null;
+    }
+
+    PrintServices(results);
+
+    Console.Write("Enter ID: ");
+
+    if (!int.TryParse(Console.ReadLine(), out int id)){return null;}
+
+    if (id < 1 || id > results.Count){string idoutofrangetext = (id < 1) ? "too low" : "too high"; Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); return null;}
+
+    return results[id - 1];
 }
 
 void PrintServices(List<ServiceRecord> services)
@@ -53,6 +85,7 @@ void PrintServiceDetails(ServiceRecord service)
 
 ServiceReader reader = new();
 ServiceManager manager = new();
+ServiceWatcher watcher = new();
 List<ServiceRecord> services;
 
 Console.WriteLine("=== Welcome to the service watcher! ===");
@@ -65,7 +98,8 @@ while (AppRunning)
     Console.Write("Your choice: ");
     string? input = Console.ReadLine();
     string? query;
-    int id;
+    //int id;
+    ServiceRecord service;
     List<ServiceRecord> results;
     switch (input)
     {
@@ -96,40 +130,16 @@ while (AppRunning)
             }
                 break;
         case "5":
-            Console.Write("Search service:");
-            query = Console.ReadLine();
-            if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No name provided"); break;}
-            results = SearchServiceKeyword(services, query);
-            if (results.Count == 0)
-            {
-                Console.WriteLine($"No matches for name '{query}'");
-                break;
-            } else {
-                PrintServices(results);
-                Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
-            }
-            Console.Write("Enter ID:");
-            if (!int.TryParse(Console.ReadLine(), out id)){Console.WriteLine("Invalid ID"); break;}
-            if (id > results.Count || id < 1){string idoutofrangetext = (id < 1) ? "too low" : "too high" ;Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); break;}
-            manager.StartService(results[id - 1].Name);
+            service = SelectService(services);
+            if (service != null){manager.StartService(service.Name);}
             break;
         case "6":
-            Console.Write("Search service:");
-            query = Console.ReadLine();
-            if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No name provided"); break;}
-            results = SearchServiceKeyword(services, query);
-            if (results.Count == 0)
-            {
-                Console.WriteLine($"No matches for name '{query}'");
-                break;
-            } else {
-                PrintServices(results);
-                Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
-            }
-            Console.Write("Enter ID:");
-            if (!int.TryParse(Console.ReadLine(), out id)){Console.WriteLine("Invalid ID"); break;}
-            if (id > results.Count || id < 1){string idoutofrangetext = (id < 1) ? "too low" : "too high" ;Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); break;}
-            manager.StopService(results[id - 1].Name);
+            service = SelectService(services);
+            if (service != null){manager.StopService(service.Name);}
+            break;
+        case "7":
+            service = SelectService(services);
+            if (service != null){watcher.Watch(service.Name);}
             break;
         case "10":
             Console.WriteLine("OK!");
