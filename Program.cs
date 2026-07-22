@@ -1,4 +1,7 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections;
+using System.Dynamic;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 void Display_Menu()
 {
@@ -7,26 +10,13 @@ void Display_Menu()
     Console.WriteLine("1. List all services");
     Console.WriteLine("2. List stopped services");
     Console.WriteLine("3. List running services");
-    Console.WriteLine("4. Start stopped services");
-    Console.WriteLine("5. Search service by name");
+    Console.WriteLine("4. Search services by name");
+    Console.WriteLine("5. Start service");
+    Console.WriteLine("6. Stop service {requires admin priviliges}");
     Console.WriteLine("10. Exit");
     Console.WriteLine("====================================");
     Console.WriteLine();
 }
-/*
-List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
-{   
-    List<ServiceRecord> result = new();
-    foreach(var s in services)
-    {
-        if(s.IsRunning == running)
-        {
-            result.Add(s);
-        }
-    }
-    return result;
-}
-*/
 
 List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
 {   
@@ -35,17 +25,17 @@ List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool 
 
 List<ServiceRecord> SearchServiceKeyword(List<ServiceRecord> services, string query)
 {   
-    return services.Where(s => s.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || s.DisplayName.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+    return services.Where(s => s.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || s.DisplayName.Contains(query, StringComparison.OrdinalIgnoreCase)).OrderBy(s => s.DisplayName).ToList();
 }
 
 void PrintServices(List<ServiceRecord> services)
 {
     Console.WriteLine();
-    Console.WriteLine("Id   Status     Display Name");
-    Console.WriteLine("-------------------------------------------");
+    Console.WriteLine("Id   Status     Service Name                                  Display Name");
+    Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
     for(int i = 0; i < services.Count(); i++)
     {
-        Console.WriteLine($"{i+1,-4} {services[i].Status,-10} {services[i].DisplayName}");
+        Console.WriteLine($"{i+1,-4} {services[i].Status,-10} {services[i].Name,-45} {services[i].DisplayName}");
     }
     Console.WriteLine();
 }
@@ -61,9 +51,8 @@ void PrintServiceDetails(ServiceRecord service)
     Console.WriteLine();
 }
 
-
-
 ServiceReader reader = new();
+ServiceManager manager = new();
 List<ServiceRecord> services;
 
 Console.WriteLine("=== Welcome to the service watcher! ===");
@@ -73,8 +62,11 @@ bool AppRunning = true;
 while (AppRunning)
 {
     services = reader.GetServices();
-    Console.WriteLine("Your choice: ");
+    Console.Write("Your choice: ");
     string? input = Console.ReadLine();
+    string? query;
+    int id;
+    List<ServiceRecord> results;
     switch (input)
     {
         case "1":
@@ -87,16 +79,58 @@ while (AppRunning)
             PrintServices(GetServicesBasedOnStatus(services, true));
             break;
         case "4":
-            PrintServiceDetails(services[100]);
-            break;
-            case "5":
-                Console.WriteLine("Search keyword:");
-                string? query = Console.ReadLine();
-                if(query == "" || query == null){Console.WriteLine("No keyword provided"); break;;}
-                var results = SearchServiceKeyword(services, query);
+                Console.Write("Search keyword:");
+                query = Console.ReadLine(); // here
+                if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No keyword provided"); break;}
+                results = SearchServiceKeyword(services, query); // here
+                if (results.Count == 0)
+            {
+                Console.WriteLine($"No matches for keyword '{query}'");
+            } else if (results.Count == 1)
+            {
+                PrintServiceDetails(results[0]);
+                Console.WriteLine($"Found one match for keyword '{query}'");
+            } else {
                 PrintServices(results);
                 Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
-                break;;
+            }
+                break;
+        case "5":
+            Console.Write("Search service:");
+            query = Console.ReadLine();
+            if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No name provided"); break;}
+            results = SearchServiceKeyword(services, query);
+            if (results.Count == 0)
+            {
+                Console.WriteLine($"No matches for name '{query}'");
+                break;
+            } else {
+                PrintServices(results);
+                Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
+            }
+            Console.Write("Enter ID:");
+            if (!int.TryParse(Console.ReadLine(), out id)){Console.WriteLine("Invalid ID"); break;}
+            if (id > results.Count || id < 1){string idoutofrangetext = (id < 1) ? "too low" : "too high" ;Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); break;}
+            manager.StartService(results[id - 1].Name);
+            break;
+        case "6":
+            Console.Write("Search service:");
+            query = Console.ReadLine();
+            if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No name provided"); break;}
+            results = SearchServiceKeyword(services, query);
+            if (results.Count == 0)
+            {
+                Console.WriteLine($"No matches for name '{query}'");
+                break;
+            } else {
+                PrintServices(results);
+                Console.WriteLine($"Found {results.Count} services that match the keyword '{query}'");
+            }
+            Console.Write("Enter ID:");
+            if (!int.TryParse(Console.ReadLine(), out id)){Console.WriteLine("Invalid ID"); break;}
+            if (id > results.Count || id < 1){string idoutofrangetext = (id < 1) ? "too low" : "too high" ;Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); break;}
+            manager.StopService(results[id - 1].Name);
+            break;
         case "10":
             Console.WriteLine("OK!");
             AppRunning = false;
