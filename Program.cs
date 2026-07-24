@@ -13,7 +13,7 @@ void Display_Menu()
     Console.WriteLine("4. Search services by name");
     Console.WriteLine("5. Start service");
     Console.WriteLine("6. Stop service {requires admin priviliges}");
-    Console.WriteLine("7. Watch service");
+    Console.WriteLine("7. Watch a service");
     Console.WriteLine("10. Exit");
     Console.WriteLine("====================================");
     Console.WriteLine();
@@ -99,7 +99,7 @@ while (AppRunning)
     string? input = Console.ReadLine();
     string? query;
     //int id;
-    ServiceRecord service;
+    ServiceRecord? service;
     List<ServiceRecord> results;
     switch (input)
     {
