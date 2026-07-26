@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Dynamic;
 using System.Net;
+using System.Security.Principal;
 using System.Security.Cryptography.X509Certificates;
 
-void Display_Menu()
+bool RunningAsAdmin()
+{
+    using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+    {
+        WindowsPrincipal principal = new WindowsPrincipal(identity);
+        return principal.IsInRole(WindowsBuiltInRole.Administrator);
+    }
+}
+
+void Display_Menu(bool runningasadmin)
 {
     Console.WriteLine();
     Console.WriteLine("====================================");
@@ -12,7 +22,13 @@ void Display_Menu()
     Console.WriteLine("3. List running services");
     Console.WriteLine("4. Search services by name");
     Console.WriteLine("5. Start service");
-    Console.WriteLine("6. Stop service {requires admin priviliges}");
+    if (runningasadmin)
+    {
+        Console.WriteLine("6. Stop service");
+    } else
+    {
+        Console.WriteLine("6. Stop service {requires admin priviliges}");
+    }
     Console.WriteLine("7. Watch a service");
     Console.WriteLine("10. Exit");
     Console.WriteLine("====================================");
@@ -20,7 +36,7 @@ void Display_Menu()
 }
 
 
-
+bool userisadmin = RunningAsAdmin();
 ServiceReader reader = new();
 ServiceManager manager = new();
 ServiceWatcher watcher = new();
@@ -28,7 +44,7 @@ ServiceHelper helper = new();
 List<ServiceRecord> services;
 
 Console.WriteLine("=== Welcome to the service watcher! ===");
-Display_Menu();
+Display_Menu(userisadmin);
 
 bool AppRunning = true;
 while (AppRunning)
@@ -37,7 +53,6 @@ while (AppRunning)
     Console.Write("Your choice: ");
     string? input = Console.ReadLine();
     string? query;
-    //int id;
     ServiceRecord? service;
     List<ServiceRecord> results;
     switch (input)

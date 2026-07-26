@@ -24,21 +24,15 @@ class ServiceHelper {
         string? query = Console.ReadLine();
         if (string.IsNullOrWhiteSpace(query)){return null;}
         var results = SearchServiceKeyword(services, query);
-
         if (results.Count == 0)
         {
             Console.WriteLine($"No matches for '{query}'");
             return null;
         }
-
         PrintServices(results);
-
         Console.Write("Enter ID: ");
-
         if (!int.TryParse(Console.ReadLine(), out int id)){return null;}
-
         if (id < 1 || id > results.Count){string idoutofrangetext = (id < 1) ? "too low" : "too high"; Console.WriteLine($"Out of range: {id} is {idoutofrangetext}"); return null;}
-
         return results[id - 1];
     }
 
