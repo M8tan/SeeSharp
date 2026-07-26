@@ -12,8 +12,7 @@ class ServiceReader
                 Name = service.ServiceName,
                 DisplayName = service.DisplayName,
 
-                IsRunning = service.Status == ServiceControllerStatus.Running,
-                Status = service.Status.ToString(),
+                Status = service.Status,
 
                 CanStop = service.CanStop,
                 CanPause = service.CanPauseAndContinue,

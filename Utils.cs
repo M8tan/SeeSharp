@@ -1,3 +1,4 @@
+using System.Net;
 using System.Security.Principal;
 
 class Utils
@@ -23,15 +24,28 @@ class Utils
         if (runningasadmin)
         {
             Console.WriteLine("6. Stop service");
+            Console.WriteLine("7. Restart service");
         } else
         {
             Console.WriteLine("6. Stop service {requires admin priviliges}");
+            Console.WriteLine("7. Restart service {requires admin priviliges}");
+
         }
-        Console.WriteLine("7. Watch a service");
+        Console.WriteLine("8. Watch a service");
         Console.WriteLine("10. Exit");
         Console.WriteLine("====================================");
         Console.WriteLine();
     }
 
+    public void PrintResponse(Response res)
+    {
+        if (res.CompletedSuccessfully)
+        {
+            Console.WriteLine($"Successfully completed process {res.ProcessType} on service {res.ServiceName}");
+        } else
+        {
+            Console.WriteLine($"Failed to perform process {res.ProcessType} on service {res.ServiceName}: {res.Message}");
+        }
+    }
 
 }

@@ -3,7 +3,7 @@ using System.ServiceProcess;
 class ServiceHelper {
     public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
     {   
-        return services.Where(s => s.IsRunning == running).ToList();
+        return services.Where(s => s.Status == ServiceControllerStatus.Running).ToList();
     }
 
     /*

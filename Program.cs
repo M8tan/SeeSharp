@@ -8,6 +8,7 @@ ServiceManager manager = new();
 ServiceWatcher watcher = new();
 ServiceHelper helper = new();
 Utils utils = new();
+Response response = new();
 bool userisadmin = utils.RunningAsAdmin();
 List<ServiceRecord> services;
 
@@ -53,13 +54,23 @@ while (AppRunning)
                 break;
         case "5":
             service = helper.SelectService(services);
-            if (service != null){manager.StartService(service.Name);}
+            if (service == null){Console.WriteLine("No services selected"); break;}
+            response = manager.StartService(service.Name);
+            utils.PrintResponse(response);
             break;
         case "6":
             service = helper.SelectService(services);
-            if (service != null){manager.StopService(service.Name);}
+            if (service == null){Console.WriteLine("No services selected"); break;}
+            response = manager.StopService(service.Name);
+            utils.PrintResponse(response);
             break;
         case "7":
+            service = helper.SelectService(services);
+            if (service == null){Console.WriteLine("No services selected"); break;}
+            response = manager.RestartService(service.Name);
+            utils.PrintResponse(response);
+            break;
+        case "8":
             service = helper.SelectService(services);
             if (service != null){watcher.Watch(service.Name);}
             break;
