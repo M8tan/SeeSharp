@@ -16,6 +16,7 @@ class Utils
     {
         Console.WriteLine();
         Console.WriteLine("====================================");
+        Console.WriteLine("0. Show this menu");
         Console.WriteLine("1. List all services");
         Console.WriteLine("2. List stopped services");
         Console.WriteLine("3. List running services");

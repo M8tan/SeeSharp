@@ -27,6 +27,9 @@ while (AppRunning)
     List<ServiceRecord> results;
     switch (input)
     {
+        case "0":
+            utils.Display_Menu(userisadmin);
+            break;
         case "1":
             helper.PrintServices(services);
             break;
