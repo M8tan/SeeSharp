@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Dynamic;
 using System.Net;
+using System.ServiceProcess;
 using System.Security.Cryptography.X509Certificates;
 
 ServiceReader reader = new();
@@ -30,10 +31,10 @@ while (AppRunning)
             helper.PrintServices(services);
             break;
         case "2":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, false));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Stopped));
             break;
         case "3":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, true));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Running));
             break;
         case "4":
                 Console.Write("Search keyword:");

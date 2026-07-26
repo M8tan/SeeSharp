@@ -1,9 +1,9 @@
 using System.ServiceProcess;
 
 class ServiceHelper {
-    public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
+    public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, ServiceControllerStatus status)
     {   
-        return services.Where(s => s.Status == ServiceControllerStatus.Running).ToList();
+        return services.Where(s => s.Status == status).ToList();
     }
 
     /*
