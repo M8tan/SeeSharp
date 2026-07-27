@@ -40,12 +40,12 @@ class Utils
 
     public void PrintResponse(Response res)
     {
-        if (res.CompletedSuccessfully)
+        if (res.Success)
         {
-            Console.WriteLine($"Successfully completed process {res.ProcessType} on service {res.ServiceName}");
+            Console.WriteLine($"Successfully completed process {res.Operation} on service {res.ServiceName}");
         } else
         {
-            Console.WriteLine($"Failed to perform process {res.ProcessType} on service {res.ServiceName}: {res.Message}");
+            Console.WriteLine($"Failed to perform process {res.Operation} on service {res.ServiceName}: {res.Message}");
         }
     }
 

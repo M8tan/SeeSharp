@@ -6,12 +6,10 @@ class ServiceHelper {
         return services.Where(s => s.Status == status).ToList();
     }
 
-    /*
     public List<ServiceRecord> GetServicesBasedOnStopability(List<ServiceRecord> services, bool canstop)
     {   
         return services.Where(s => s.CanStop == canstop).ToList();
-    }
-    */
+    }    
 
     public List<ServiceRecord> SearchServiceKeyword(List<ServiceRecord> services, string query)
     {   

@@ -1,81 +1,73 @@
+using System.Runtime.CompilerServices;
 using System.ServiceProcess;
+
+enum ServiceOperation
+{
+    Start,
+    Stop,
+    Restart
+}
 class Response {
-    public bool CompletedSuccessfully { get; set; }
-    public string ServiceName { get; set; } = "";
-    public string ProcessType { get; set; } = "";
-    public string Message { get; set; } = "";
+    public bool Success { get; init; }
+    public string ServiceName { get; init; } = "";
+    public ServiceOperation Operation { get; init; }
+    public string Message { get; init; } = "";
+
+    public static Response OK(string service, ServiceOperation operation) => new(){Success = true, ServiceName = service, Operation = operation};
+    public static Response FAIL(string service, ServiceOperation operation, string message) => new(){Success = false, ServiceName = service, Operation = operation, Message = message};
+
 }
 class ServiceManager
 {
     public Response StartService(string serviceName)
     {
-        Response response = new();
-        response.ServiceName = serviceName;
-        response.ProcessType = "Start";
         try
         {
             using ServiceController service = new(serviceName);
 
             if (service.Status == ServiceControllerStatus.Running)
             {
-                response.CompletedSuccessfully = true;
-                return response;
+                return Response.OK(serviceName, ServiceOperation.Start);
             }
 
             service.Start();
             service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(15));
             
-            response.CompletedSuccessfully = true;
-            return response;
+            return Response.OK(serviceName, ServiceOperation.Start);
             
         }
         catch (Exception ex)
         {
-            response.CompletedSuccessfully = false;
-            response.Message = $"Error starting service: {ex.Message}";
-            return response;
+            return Response.FAIL(serviceName, ServiceOperation.Start, ex.Message);
         }
     }
 
     public Response StopService(string serviceName)
     {
-        Response response = new();
-        response.ServiceName = serviceName;
-        response.ProcessType = "Stop";
         try
         {
             using ServiceController service = new(serviceName);
             if (service.Status == ServiceControllerStatus.Stopped){
-                response.CompletedSuccessfully = true;
-                return response;
+                return Response.OK(serviceName, ServiceOperation.Stop);
             }
             if (!service.CanStop)
             {
-                response.CompletedSuccessfully = false;
-                response.Message = "This service cannot be stopped";
-                return response;
+                return Response.FAIL(serviceName, ServiceOperation.Stop, "Service can't be stopped");
             }
 
             service.Stop();
             service.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(15));
 
-            response.CompletedSuccessfully = true;
-            return response;
+            return Response.OK(serviceName, ServiceOperation.Stop);
         }
         catch (Exception ex)
         {
-            response.CompletedSuccessfully = false;
-            response.Message = $"Error stopping service: {ex.Message}";
-            return response;
-            
+            return Response.FAIL(serviceName, ServiceOperation.Stop, ex.Message);  
         }
     }
 
     public Response RestartService(string serviceName)
     {
-        Response response = new();
-        response.ServiceName = serviceName;
-        response.ProcessType = "Restart";
         try
         {
             using ServiceController service = new(serviceName);
@@ -89,14 +81,11 @@ class ServiceManager
             service.Start();
             service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(15));
 
-            response.CompletedSuccessfully = true;
-            return response;
+            return Response.OK(serviceName, ServiceOperation.Restart);
         }
         catch (Exception ex)
         {
-            response.CompletedSuccessfully = false;
-            response.Message = $"Error restarting service: {ex.Message}";
-            return response;
+            return Response.FAIL(serviceName, ServiceOperation.Restart, ex.Message);  
         }
     }
 }
