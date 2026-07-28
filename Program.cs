@@ -58,19 +58,19 @@ while (AppRunning)
                 break;
         case "5":
             service = helper.SelectService(services);
-            if (service == null){Console.WriteLine("No services selected"); break;}
+            if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StartService(service.Name);
             utils.PrintResponse(response);
             break;
         case "6":
             service = helper.SelectService(services);
-            if (service == null){Console.WriteLine("No services selected"); break;}
+            if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StopService(service.Name);
             utils.PrintResponse(response);
             break;
         case "7":
             service = helper.SelectService(services);
-            if (service == null){Console.WriteLine("No services selected"); break;}
+            if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.RestartService(service.Name);
             utils.PrintResponse(response);
             break;
