@@ -34,6 +34,10 @@ class ServiceWatcher
             if (i % 5 == 0)
             {
                 Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
+            }
+            if (i == 2147483646)
+            {
+                i = 0;
             }*/
             Thread.Sleep(1000);
         }
