@@ -15,11 +15,12 @@ List<ServiceRecord> services;
 
 Console.WriteLine("=== Welcome to the service watcher! ===");
 utils.Display_Menu(userisadmin);
+services = reader.GetServices();
 
 bool AppRunning = true;
 while (AppRunning)
 {
-    services = reader.GetServices();
+    //services = reader.GetServices();
     Console.Write("Your choice: ");
     string? input = Console.ReadLine();
     string? query;
@@ -61,22 +62,28 @@ while (AppRunning)
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StartService(service.Name);
             utils.PrintResponse(response);
+            if (response.Success){services = reader.GetServices();}
             break;
         case "6":
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StopService(service.Name);
             utils.PrintResponse(response);
+            if (response.Success){services = reader.GetServices();}
             break;
         case "7":
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.RestartService(service.Name);
             utils.PrintResponse(response);
+            if (response.Success){services = reader.GetServices();}
             break;
         case "8":
             service = helper.SelectService(services);
             if (service != null){watcher.Watch(service.Name);}
+            break;
+        case "9":
+            services = reader.GetServices();
             break;
         case "10":
             Console.WriteLine("OK!");

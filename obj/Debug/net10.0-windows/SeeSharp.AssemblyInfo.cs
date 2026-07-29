@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SeeSharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15ba691795a26087df7d0b5127134c5fea6ad187")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35dd9208fdab5c9669373044b0888e6b51f379fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("SeeSharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SeeSharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

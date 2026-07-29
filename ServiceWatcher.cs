@@ -13,7 +13,7 @@ class ServiceWatcher
         Console.WriteLine("Press Q to stop watching.");
         Console.WriteLine();
         Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
-        //int i = 0;
+        //int secondspassed = 0;
         while (true)
         {
             if (Console.KeyAvailable){if (Console.ReadKey(true).Key == ConsoleKey.Q){break;}}
@@ -23,21 +23,18 @@ class ServiceWatcher
             if (service.Status != previousStatus)
             {
                 previousStatus = service.Status;
-
                 Console.ForegroundColor = GetColor(previousStatus);
-
                 Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
-
                 Console.ResetColor();
             }
             /*i++;
-            if (i % 5 == 0)
+            if (secondspassed % 5 == 0)
             {
                 Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
             }
-            if (i == 2147483646)
+            if (secondspassed == 2147483646)
             {
-                i = 0;
+                secondspassed = 0;
             }*/
             Thread.Sleep(1000);
         }
