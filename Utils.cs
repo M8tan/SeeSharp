@@ -33,6 +33,7 @@ class Utils
 
         }
         Console.WriteLine(" 8. Watch a service");
+        Console.WriteLine(" 9. Refresh services");
         Console.WriteLine(" 10. Exit");
         Console.WriteLine("==================================================");
         Console.WriteLine();
