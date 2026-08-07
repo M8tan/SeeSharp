@@ -34,7 +34,6 @@ class ServiceManager
             service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(15));
             
             return Response.OK(serviceName, ServiceOperation.Start);
-            
         }
         catch (Exception ex)
         {

@@ -1,5 +1,5 @@
 ﻿Add-Type -AssemblyName system.windows.forms
-$Source = "C:\Projects\Private\SeeSharp"
+$Source = "C:\Projects\SeeSharp"
 $Res = [System.Text.StringBuilder]::new()
 foreach($Item in (Get-ChildItem -Path $Source -Filter *.cs -File )){
     #Write-Host "$($Item.Name): $(Get-Content -Path $Item.PSPath -Raw)`r`n"
