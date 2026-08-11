@@ -3,6 +3,7 @@ using System.Dynamic;
 using System.Net;
 using System.ServiceProcess;
 using System.Security.Cryptography.X509Certificates;
+using System;
 
 ServiceReader reader = new();
 ServiceManager manager = new();
@@ -13,7 +14,9 @@ Response response = new();
 bool userisadmin = utils.RunningAsAdmin();
 List<ServiceRecord> services;
 
+Console.ForegroundColor = ConsoleColor.DarkCyan;
 Console.WriteLine("=== Welcome to the service watcher! ===");
+Console.ResetColor();
 utils.Display_Menu(userisadmin);
 services = reader.GetServices();
 
