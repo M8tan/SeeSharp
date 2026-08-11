@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Security.Principal;
 
@@ -43,11 +44,14 @@ class Utils
     {
         if (res.Success)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Successfully completed process {res.Operation} on service {res.ServiceName}");
         } else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Failed to perform process {res.Operation} on service {res.ServiceName}: {res.Message}");
         }
+        Console.ResetColor();
     }
 
 }
