@@ -23,7 +23,6 @@ services = reader.GetServices();
 bool AppRunning = true;
 while (AppRunning)
 {
-    //services = reader.GetServices();
     Console.Write("Your choice: ");
     string? input = Console.ReadLine();
     string? query;
@@ -89,7 +88,7 @@ while (AppRunning)
             services = reader.GetServices();
             break;
         case "10":
-            Console.WriteLine("OK!");
+            Console.Write("OK!\nThanks for using this app :)");
             AppRunning = false;
             break;
         default:
