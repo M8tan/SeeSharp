@@ -17,24 +17,25 @@ class Utils
     {
         Console.WriteLine();
         Console.WriteLine("==================================================");
-        Console.WriteLine(" 0. Show this menu");
-        Console.WriteLine(" 1. List all services");
-        Console.WriteLine(" 2. List stopped services");
-        Console.WriteLine(" 3. List running services");
-        Console.WriteLine(" 4. Search services by name");
-        Console.WriteLine(" 5. Start service");
+        Console.WriteLine("  0. Show this menu");
+        Console.WriteLine("  1. List all services");
+        Console.WriteLine("  2. List stopped services");
+        Console.WriteLine("  3. List running services");
+        Console.WriteLine("  4. Search services by name");
+        Console.WriteLine("  5. Start service");
         if (runningasadmin)
         {
-            Console.WriteLine(" 6. Stop service");
-            Console.WriteLine(" 7. Restart service");
+            Console.WriteLine("  6. Stop service");
+            Console.WriteLine("  7. Restart service");
         } else
         {
-            Console.WriteLine(" 6. Stop service {requires admin priviliges}");
-            Console.WriteLine(" 7. Restart service {requires admin priviliges}");
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("  6. Stop service {requires admin priviliges}");
+            Console.WriteLine("  7. Restart service {requires admin priviliges}");
+            Console.ResetColor();
         }
-        Console.WriteLine(" 8. Watch a service");
-        Console.WriteLine(" 9. Refresh services");
+        Console.WriteLine("  8. Watch a service");
+        Console.WriteLine("  9. Refresh services");
         Console.WriteLine(" 10. Exit");
         Console.WriteLine("==================================================");
         Console.WriteLine();

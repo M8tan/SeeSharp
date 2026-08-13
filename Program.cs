@@ -67,6 +67,13 @@ while (AppRunning)
             if (response.Success){services = reader.GetServices();}
             break;
         case "6":
+            if (!userisadmin)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Stopping a service requires admin permissions :)");
+                Console.ResetColor();
+                break;
+            }
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StopService(service.Name);
@@ -74,6 +81,13 @@ while (AppRunning)
             if (response.Success){services = reader.GetServices();}
             break;
         case "7":
+            if (!userisadmin)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Restarting a service requires admin permissions :)");
+                Console.ResetColor();
+                break;
+            }
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.RestartService(service.Name);
