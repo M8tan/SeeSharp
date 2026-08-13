@@ -73,6 +73,10 @@ class ServiceManager
 
             if (service.Status != ServiceControllerStatus.Stopped)
             {
+                if (!service.CanStop)
+                {
+                    return Response.FAIL(serviceName, ServiceOperation.Restart, "Service can't be stopped, so restart is not possible");
+                }
                 service.Stop();
                 service.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(15));
             }
