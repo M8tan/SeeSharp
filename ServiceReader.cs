@@ -17,7 +17,6 @@ class ServiceReader
                 CanStop = service.CanStop,
                 CanPause = service.CanPauseAndContinue,
 
-                RestartCount = 0
             });
         }
 
