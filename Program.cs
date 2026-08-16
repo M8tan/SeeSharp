@@ -4,6 +4,7 @@ using System.Net;
 using System.ServiceProcess;
 using System.Security.Cryptography.X509Certificates;
 using System;
+using System.Collections.Generic;
 
 if (!OperatingSystem.IsWindows())
 {
@@ -22,8 +23,8 @@ Response response = new();
 bool userisadmin = utils.RunningAsAdmin();
 List<ServiceRecord>? services;
 services = reader.GetServices();
-
-if (services == null)
+List<ServiceRecord>? test = new();
+if (services.Count <= 0)
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("No services found");
@@ -61,9 +62,9 @@ while (AppRunning)
             break;
         case "4":
                 Console.Write("Search keyword:");
-                query = Console.ReadLine(); // here
+                query = Console.ReadLine();
                 if(string.IsNullOrWhiteSpace(query)){Console.WriteLine("No keyword provided"); break;}
-                results = helper.SearchServiceKeyword(services, query); // here
+                results = helper.SearchServiceKeyword(services, query);
                 if (results.Count == 0)
             {
                 Console.WriteLine($"No matches for keyword '{query}'");

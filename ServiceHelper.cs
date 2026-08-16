@@ -1,3 +1,4 @@
+using System;
 using System.ServiceProcess;
 
 class ServiceHelper {
@@ -37,6 +38,11 @@ class ServiceHelper {
 
     public void PrintServices(List<ServiceRecord> services)
     {
+        if(services.Count <= 0)
+        {
+            // No services to print handler
+            return;
+        }
         Console.WriteLine();
         Console.WriteLine("Id   Status     Service Name                                  Display Name");
         Console.WriteLine("--------------------------------------------------------------------------------------------------------------------");
