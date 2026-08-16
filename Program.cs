@@ -5,6 +5,14 @@ using System.ServiceProcess;
 using System.Security.Cryptography.X509Certificates;
 using System;
 
+if (!OperatingSystem.IsWindows())
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("OS is not compatibale with this app");
+    Console.ResetColor();
+    return;
+}
+
 ServiceReader reader = new();
 ServiceManager manager = new();
 ServiceWatcher watcher = new();
@@ -12,13 +20,22 @@ ServiceHelper helper = new();
 Utils utils = new();
 Response response = new();
 bool userisadmin = utils.RunningAsAdmin();
-List<ServiceRecord> services;
+List<ServiceRecord>? services;
+services = reader.GetServices();
+
+if (services == null)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine("No services found");
+    Console.ResetColor();
+    return;
+}
 
 Console.ForegroundColor = ConsoleColor.DarkCyan;
 Console.WriteLine("=== Welcome to the service watcher! ===");
 Console.ResetColor();
 utils.Display_Menu(userisadmin);
-services = reader.GetServices();
+
 
 bool AppRunning = true;
 while (AppRunning)
