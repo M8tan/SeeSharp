@@ -6,5 +6,4 @@ class ServiceRecord
     public ServiceControllerStatus Status { get; set; }
     public bool CanStop { get; set; }
     public bool CanPause { get; set; }
-    public int RestartCount { get; set; }
 }
