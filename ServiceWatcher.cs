@@ -7,6 +7,7 @@ class ServiceWatcher
         using ServiceController service = new(serviceName);
 
         ServiceControllerStatus previousStatus = service.Status;
+        ServiceControllerStatus temppreviousstatus;
 
         Console.WriteLine();
         Console.WriteLine($"Watching '{service.DisplayName}'");
@@ -22,9 +23,10 @@ class ServiceWatcher
 
             if (service.Status != previousStatus)
             {
+                temppreviousstatus = previousStatus;
                 previousStatus = service.Status;
                 Console.ForegroundColor = GetColor(previousStatus);
-                Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
+                Console.WriteLine($"{DateTime.Now:T} : {temppreviousstatus} -> {previousStatus}");
                 Console.ResetColor();
             }
             /*i++;
