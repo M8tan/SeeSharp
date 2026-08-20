@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Dynamic;
-using System.Net;
-using System.ServiceProcess;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.ServiceProcess;
 using System;
 using System.Collections.Generic;
 
@@ -21,9 +17,7 @@ ServiceHelper helper = new();
 Utils utils = new();
 Response response = new();
 bool userisadmin = utils.RunningAsAdmin();
-List<ServiceRecord>? services;
-services = reader.GetServices();
-List<ServiceRecord>? test = new();
+List<ServiceRecord> services = reader.GetServices();
 if (services.Count <= 0)
 {
     Console.ForegroundColor = ConsoleColor.Red;
@@ -129,3 +123,12 @@ while (AppRunning)
     }
 }
 
+
+/*
+
+using System.Collections;
+using System.Dynamic;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+
+*/
