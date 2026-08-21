@@ -8,7 +8,7 @@ if (!OperatingSystem.IsWindows())
     Console.WriteLine("OS is not compatibale with this app");
     Console.ResetColor();
     return;
-}
+} // not too sure how it's gonna work but why not add it
 
 ServiceReader reader = new();
 ServiceManager manager = new();
@@ -16,7 +16,7 @@ ServiceWatcher watcher = new();
 ServiceHelper helper = new();
 Utils utils = new();
 Response response = new();
-bool userisadmin = utils.RunningAsAdmin();
+bool userisadmin = utils.RunningAsAdmin(); // required for permission checking and menu display
 List<ServiceRecord> services = reader.GetServices();
 if (services.Count <= 0)
 {
