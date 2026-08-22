@@ -14,7 +14,7 @@ class ServiceWatcher
         Console.WriteLine("Press Q to stop watching.");
         Console.WriteLine();
         Console.WriteLine($"{DateTime.Now:T} : {previousStatus}");
-        //int secondspassed = 0;
+        //int secondspassed = 0; for showing progress regardless of status change
         while (true)
         {
             if (Console.KeyAvailable){if (Console.ReadKey(true).Key == ConsoleKey.Q){break;}}
