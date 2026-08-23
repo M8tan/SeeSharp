@@ -36,9 +36,13 @@ echo Done copying!
 echo Publish process completed :)
 
 if %PublisherMode% EQU 0 (
-timeout /t 3 /nobreak >nul
+	timeout /t 3 /nobreak >nul
 ) else (
-echo Exiting
+	echo Exiting
 )
 exit /b 0
 
+:: Return values - 
+:: 0 - Success
+:: 1 - Error creating file
+:: 2 - Error copying file
