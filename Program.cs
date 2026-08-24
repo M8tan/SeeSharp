@@ -83,6 +83,7 @@ while (AppRunning)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Stopping a service requires admin permissions :)");
+                Console.WriteLine("Re-run the app as an administrator to perform the operation");
                 Console.ResetColor();
                 break;
             }
@@ -97,6 +98,7 @@ while (AppRunning)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Restarting a service requires admin permissions :)");
+                Console.WriteLine("Re-run the app as an administrator to perform the operation");
                 Console.ResetColor();
                 break;
             }
