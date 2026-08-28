@@ -76,7 +76,7 @@ while (AppRunning)
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StartService(service.Name);
             utils.PrintResponse(response);
-            if (response.Success){services = reader.GetServices();}
+            if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
             break;
         case "6":
             if (!userisadmin)
@@ -91,7 +91,7 @@ while (AppRunning)
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.StopService(service.Name);
             utils.PrintResponse(response);
-            if (response.Success){services = reader.GetServices();}
+            if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
             break;
         case "7":
             if (!userisadmin)
@@ -106,7 +106,7 @@ while (AppRunning)
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.RestartService(service.Name);
             utils.PrintResponse(response);
-            if (response.Success){services = reader.GetServices();}
+            if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
             break;
         case "8":
             service = helper.SelectService(services);
