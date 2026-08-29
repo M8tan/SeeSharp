@@ -116,7 +116,9 @@ while (AppRunning)
             services = reader.GetServices();
             break;
         case "10":
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.Write("OK!\nThanks for using this app :)");
+            Console.ResetColor();
             AppRunning = false;
             break;
         default:
