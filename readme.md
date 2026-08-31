@@ -7,4 +7,8 @@ SeeSharp is an independent CLI Windows service management app, allowing:
 * Basic service operations
 * Service monitoring  
 
-with several options only being available for administrators.
+with several options only being available for administrators.  
+
+### How it works
+
+
