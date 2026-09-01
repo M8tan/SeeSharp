@@ -5,7 +5,7 @@ using System.Collections.Generic;
 if (!OperatingSystem.IsWindows())
 {
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("OS is not compatibale with this app");
+    Console.WriteLine("OS is not compatible with this app");
     Console.ResetColor();
     return;
 } // not too sure how it's gonna work but why not add it
