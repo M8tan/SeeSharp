@@ -1,11 +1,12 @@
 ﻿using System.ServiceProcess;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 if (!OperatingSystem.IsWindows())
 {
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("OS is not compatible with this app");
+    Console.WriteLine($"OS is not compatible with this app (should be a Windows distro but instead - {RuntimeInformation.OSDescription})");
     Console.ResetColor();
     return;
 } // not too sure how it's gonna work but why not add it
