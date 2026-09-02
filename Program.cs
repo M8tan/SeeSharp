@@ -27,13 +27,13 @@ if (services.Count <= 0)
     return;
 }
 
+bool AppRunning = true;
+
 Console.ForegroundColor = ConsoleColor.DarkCyan;
 Console.WriteLine("=== Welcome to the service watcher! ===");
 Console.ResetColor();
 utils.Display_Menu(userisadmin);
 
-
-bool AppRunning = true;
 while (AppRunning)
 {
     Console.Write("Your choice: ");
