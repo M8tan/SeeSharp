@@ -11,6 +11,23 @@ if (!OperatingSystem.IsWindows())
     return;
 } // not too sure how it's gonna work but why not add it
 
+if (args.Length > 0)
+{
+    if (args.Contains("--help"))
+    {
+        Console.WriteLine("Help text");
+        return;        
+    } else
+    {
+        Console.WriteLine("Sorry, unknown option:");
+        foreach (var arg in args)
+        {
+            Console.WriteLine(arg);
+        }
+        return; 
+    }
+}
+
 ServiceReader reader = new();
 ServiceManager manager = new();
 ServiceWatcher watcher = new();
@@ -83,13 +100,13 @@ while (AppRunning)
             if (!userisadmin)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Stopping a service requires admin permissions :)");
+                Console.WriteLine("Stopping a service requires admin permissions :)"); // may need to check this part, certain services could be stopped without full admin access
                 Console.WriteLine("Re-run the app as an administrator to perform the operation");
                 Console.ResetColor();
                 break;
             }
             service = helper.SelectService(services);
-            if (service == null){Console.WriteLine("No service selected"); break;}
+            if (service == null){Console.WriteLine("No service selected"); break;} // add confiirmation?
             response = manager.StopService(service.Name);
             utils.PrintResponse(response);
             if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
