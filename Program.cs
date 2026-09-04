@@ -3,14 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-if (!OperatingSystem.IsWindows())
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine($"OS is not compatible with this app (should be a Windows distro but instead - {RuntimeInformation.OSDescription})");
-    Console.ResetColor();
-    return;
-} // not too sure how it's gonna work but why not add it
-
 if (args.Length > 0)
 {
     if (args.Contains("--help"))
@@ -27,6 +19,14 @@ if (args.Length > 0)
         return; 
     }
 }
+
+if (!OperatingSystem.IsWindows())
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"OS is not compatible with this app (should be a Windows distro but instead - {RuntimeInformation.OSDescription})");
+    Console.ResetColor();
+    return;
+} // not too sure how it's gonna work but why not add it
 
 ServiceReader reader = new();
 ServiceManager manager = new();
