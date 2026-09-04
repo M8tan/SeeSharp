@@ -6,17 +6,19 @@ using System.Security.Cryptography;
 
 void PrintHelp()
 {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("Help text");
-        Console.ResetColor();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("Help text");
+    Console.ResetColor();
 }
 
 void PrintVersion(string version)
 {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write($"SeeSharp version: {version}");
-        Console.ResetColor();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine($"SeeSharp version: {version}");
+    Console.ResetColor();
 }
+
+string SeeSharpVersion = "1.0";
 
 var argsdictionary = new Dictionary<string, string>
 {
@@ -34,17 +36,19 @@ foreach (var arg in args)
         {
             case "help":
                 PrintHelp();
-                return;
+                continue;
             case "version":
-                PrintVersion("1.0");
-                return;                
+                PrintVersion(SeeSharpVersion);
+                continue;                
         }
     } else
     {
         Console.WriteLine($"Unknown argument: {arg}");
-        return;
+        continue;
     }
 }
+
+if(args.Length > 0){return;}
 
 if (!OperatingSystem.IsWindows())
 {
