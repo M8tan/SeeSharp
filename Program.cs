@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 void PrintHelp()
 {
     Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine("Help text");
+    Console.WriteLine("SeeSharp - A Windows service manager & monitor\nRun the app with '.\\SeeSharp' and select the wanted operation.\nNotice - Several operations require admin permissions, so run the app as admin when needed");
     Console.ResetColor();
 }
 
@@ -18,7 +18,7 @@ void PrintVersion(string version)
     Console.ResetColor();
 }
 
-string SeeSharpVersion = "1.0";
+string SeeSharpVersion = "1.0 test version";
 
 var argsdictionary = new Dictionary<string, string>
 {
