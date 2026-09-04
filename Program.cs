@@ -2,21 +2,47 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
-if (args.Length > 0)
+void PrintHelp()
 {
-    if (args.Contains("--help"))
-    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Help text");
-        return;        
+        Console.ResetColor();
+}
+
+void PrintVersion(string version)
+{
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.Write($"SeeSharp version: {version}");
+        Console.ResetColor();
+}
+
+var argsdictionary = new Dictionary<string, string>
+{
+    {"--help", "help"},
+    {"-h", "help"},
+    {"--version", "version"},
+    {"-v", "version"}
+};
+
+foreach (var arg in args)
+{
+    if (argsdictionary.TryGetValue(arg, out var op))
+    {
+        switch (op)
+        {
+            case "help":
+                PrintHelp();
+                return;
+            case "version":
+                PrintVersion("1.0");
+                return;                
+        }
     } else
     {
-        Console.WriteLine("Sorry, unknown option:");
-        foreach (var arg in args)
-        {
-            Console.WriteLine(arg);
-        }
-        return; 
+        Console.WriteLine($"Unknown argument: {arg}");
+        return;
     }
 }
 
