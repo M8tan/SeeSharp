@@ -18,9 +18,9 @@ void PrintVersion(string version)
     Console.ResetColor();
 }
 
-string SeeSharpVersion = "1.0 test version";
+string SeeSharpVersion = "1.0 test version"; // Things that should be in config if we add it
 
-var argsdictionary = new Dictionary<string, string>
+var argsdictionary = new Dictionary<string, string> // Things that should be in config if we add it
 {
     {"--help", "help"},
     {"-h", "help"},
@@ -28,7 +28,7 @@ var argsdictionary = new Dictionary<string, string>
     {"-v", "version"}
 };
 
-if (args.Length > 5)
+if (args.Length > 5) // Things that should be in config if we add it
 {
     Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine($"Too many arguments: {args.Length}");
@@ -58,7 +58,7 @@ foreach (var arg in args)
     } 
 }
 
-if(args.Length > 0){return;}
+if(args.Length > 0){return;} // Here to stop execution in case arguments are used, so that the app runs only if being ran without arguments
 
 if (!OperatingSystem.IsWindows())
 {
