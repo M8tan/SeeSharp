@@ -28,6 +28,14 @@ var argsdictionary = new Dictionary<string, string>
     {"-v", "version"}
 };
 
+if (args.Length > 5)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"Too many arguments: {args.Length}");
+    Console.ResetColor();
+    return;
+}
+
 foreach (var arg in args)
 {
     if (argsdictionary.TryGetValue(arg, out var op))
@@ -43,9 +51,11 @@ foreach (var arg in args)
         }
     } else
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"Unknown argument: {arg}");
+        Console.ResetColor();
         continue;
-    }
+    } 
 }
 
 if(args.Length > 0){return;}
