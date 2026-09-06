@@ -180,17 +180,17 @@ while (AppRunning)
             AppRunning = false;
             break;
         default:
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Unknown option - {input}");
+            Console.ResetColor();
             break;
     }
 }
 
 
 /*
-
 using System.Collections;
 using System.Dynamic;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
-
 */
