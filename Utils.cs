@@ -53,6 +53,4 @@ class Utils
         }
         Console.ResetColor();
     }
-
-
 }

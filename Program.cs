@@ -172,6 +172,7 @@ while (AppRunning)
             break;
         case "9":
             services = reader.GetServices();
+            Console.WriteLine("Refreshed services");
             break;
         case "10":
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
