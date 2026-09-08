@@ -29,8 +29,8 @@ class Utils
         } else
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("  6. Stop service {requires admin privileges}");
-            Console.WriteLine("  7. Restart service {requires admin privileges}");
+            Console.WriteLine("  6. Stop service {usually requires admin privileges}");
+            Console.WriteLine("  7. Restart service {usually requires admin privileges}");
             Console.ResetColor();
         }
         Console.WriteLine("  8. Watch a service");

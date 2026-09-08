@@ -137,14 +137,14 @@ while (AppRunning)
             if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
             break;
         case "6":
-            if (!userisadmin)
+            /*if (!userisadmin)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Stopping a service requires admin permissions :)"); // may need to check this part, certain services could be stopped without full admin access
                 Console.WriteLine("Re-run the app as an administrator to perform the operation");
                 Console.ResetColor();
                 break;
-            }
+            }*/
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;} // add confiirmation?
             response = manager.StopService(service.Name);
@@ -152,14 +152,14 @@ while (AppRunning)
             if (response.Success){services = reader.GetServices();} // Auto refreshing services only after succesful mod
             break;
         case "7":
-            if (!userisadmin)
+             /*if (!userisadmin)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("Restarting a service requires admin permissions :)");
                 Console.WriteLine("Re-run the app as an administrator to perform the operation");
                 Console.ResetColor();
                 break;
-            }
+            }*/
             service = helper.SelectService(services);
             if (service == null){Console.WriteLine("No service selected"); break;}
             response = manager.RestartService(service.Name);
