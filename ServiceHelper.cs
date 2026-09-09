@@ -2,11 +2,15 @@ using System;
 using System.ServiceProcess;
 
 class ServiceHelper {
-    public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, ServiceControllerStatus status)
+    /*public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, ServiceControllerStatus status)
     {   
         return services.Where(s => s.Status == status).ToList();
+    } Old function, needs service status as input */
+    public List<ServiceRecord> GetServicesBasedOnStatus(List<ServiceRecord> services, bool running)
+    {   
+        ServiceControllerStatus status = running ? ServiceControllerStatus.Running : ServiceControllerStatus.Stopped; 
+        return services.Where(s => s.Status == status).ToList();
     }
-
 /* Might be useful some time
     public List<ServiceRecord> GetServicesBasedOnStopability(List<ServiceRecord> services, bool canstop)
     {   

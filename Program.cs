@@ -1,8 +1,6 @@
-﻿using System.ServiceProcess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 
 void PrintHelp()
 {
@@ -107,10 +105,10 @@ while (AppRunning)
             helper.PrintServices(services);
             break;
         case "2":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Stopped));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, false));
             break;
         case "3":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Running));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, true));
             break;
         case "4":
                 Console.Write("Search keyword:");
@@ -194,4 +192,13 @@ using System.Collections;
 using System.Dynamic;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+*/
+
+/*
+case "2":
+    helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Stopped));
+    break;
+case "3":
+    helper.PrintServices(helper.GetServicesBasedOnStatus(services, ServiceControllerStatus.Running));
+    break;
 */
