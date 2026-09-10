@@ -105,10 +105,10 @@ while (AppRunning)
             helper.PrintServices(services);
             break;
         case "2":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, false));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, false)); // Stopped
             break;
         case "3":
-            helper.PrintServices(helper.GetServicesBasedOnStatus(services, true));
+            helper.PrintServices(helper.GetServicesBasedOnStatus(services, true)); // Running
             break;
         case "4":
                 Console.Write("Search keyword:");
