@@ -180,7 +180,7 @@ while (AppRunning)
             break;
         default:
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Unknown option - {input}");
+            Console.WriteLine($"Unknown option - {input}\nTry 0 to rewatch the menu");
             Console.ResetColor();
             break;
     }
