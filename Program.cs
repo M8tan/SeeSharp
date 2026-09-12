@@ -61,7 +61,7 @@ if(args.Length > 0){return;} // Here to stop execution in case arguments are use
 if (!OperatingSystem.IsWindows())
 {
     Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine($"OS is not compatible with this app (should be a Windows distro but instead - {RuntimeInformation.OSDescription})");
+    Console.WriteLine($"OS is not compatible with this app (should be a Windows distro but instead - {RuntimeInformation.OSDescription}).\nPlease use this app on a Windows machine :)");
     Console.ResetColor();
     return;
 } // not too sure how it's gonna work but why not add it
@@ -185,7 +185,6 @@ while (AppRunning)
             break;
     }
 }
-
 
 /*
 using System.Collections;
